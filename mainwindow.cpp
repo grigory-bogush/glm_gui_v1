@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <string>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -8,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::handleButton);
+
+    this->refreshItems();
 }
 
 MainWindow::~MainWindow()
@@ -15,13 +18,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::refreshItems() {
+    ui->listWidget->clear();
+
+    for (const auto& label : this->items) {
+        ui->listWidget->addItem(QString::fromStdString(label));
+    }
+}
+
 void MainWindow::handleButton()
 {
-    std::string text = std::string{"Clicked "};
-    std::string str = std::to_string(this->counter);
-    std::string label = text + str;
+    auto text = ui->plainTextEdit->toPlainText().toStdString();
+    if (text != "") {
+        this->items.push_back(text);
+        this->refreshItems();
 
-    ui->pushButton->setText(QString::fromStdString(label));
-    ++this->counter;
+        ui->plainTextEdit->clear();
+    }
 }
 

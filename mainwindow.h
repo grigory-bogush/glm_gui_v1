@@ -17,7 +17,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    std::list<std::string> items = {"item1", "item2"};
+
     void handleButton();
-    int counter=0;
+    void refreshItems();
+
 };
 #endif // MAINWINDOW_H

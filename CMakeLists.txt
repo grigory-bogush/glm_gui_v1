@@ -34,6 +34,12 @@ set(PROJECT_SOURCES
         mainwindow.ui
 	title.h
 	title.cpp
+	libs/json.hpp
+	storage_manager.h
+	storage_manager.cpp
+	maincore.cpp
+	maincore.h
+	test_file.txt
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
